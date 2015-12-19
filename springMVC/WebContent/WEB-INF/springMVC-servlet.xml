@@ -12,14 +12,71 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd     
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-    <context:component-scan base-package="app04"/>
-    <context:component-scan base-package="app05a"/>
-    <mvc:annotation-driven/>
+	<!-- 扫描的包 -->
+	<!-- 为了测试app07先注释app04a和app05a -->
+<!--     <context:component-scan base-package="app04"/>
+    <context:component-scan base-package="app05a"/> -->
+    <context:component-scan base-package="app06a"/>
+    <context:component-scan base-package="app07a"/>
+    <!-- 使用转换器 -->
+    <!--<mvc:annotation-driven conversion-service="conversionService"/>-->
+    <!-- 使用格式化 -->
+    <!-- conversionService2 -->
+   <!--  <mvc:annotation-driven conversion-service="conversionService2"/> -->
+    <!-- 使用注册器替代格式化 -->
+    <!-- <mvc:annotation-driven />意思是开启使用注释的功能-->
+    <!-- conversionService3是格式化或者转换器 -->
+    <mvc:annotation-driven conversion-service="conversionService3"/>
+    <!-- 这个的作用是让DispatcherServlet不将下列路径理解为一个request请求,
+    在项目中,这个是必须的,如果没有加这些就可能造成上述问题 -->
     <mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/js/**" location="/js/"/>
     <mvc:resources mapping="/*.html" location="/"/>
+    <!-- 错误信息配置 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+    	<property name="basename" value="/WEB-INF/resource/messages" />
+    </bean>
+    <!-- org.springframework.context.support.ConversionServiceFactoryBean.class -->
+    <!-- 使用转换器的bean -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+	    <property name="converters">
+	    	<list>
+	    		<bean class="app06a.converter.StringToDateConverter" >
+					<constructor-arg type="java.lang.String" value="MM-dd-yyyy"/>
+	    		</bean>
+	    	</list>
+	    </property>
+    	
+    </bean>
     
+    <!-- 使用Formatter的格式化 -->
+    <bean id="conversionService2" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <property name="formatters">
+	    	<set>
+	    	
+	    	<!-- /springMVC/src/app06a/formatter/DateFormatter.java -->
+	    		<bean class="app06a.formatter.DateFormatter">
+					<constructor-arg type="java.lang.String" value="MM-dd-yyyy"/>
+	    		</bean>
+	    	</set>
+	    </property>
+    </bean>
+    
+        <!-- 使用注册器替代Formatter的格式化 -->
+    <bean id="conversionService3" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	    <property name="formatterRegistrars">
+	    	<set>
+	    	<!-- /springMVC/src/app06a/formatter/DateFormatter.java -->
+	    		<bean class="app06a.formatter.MyFormatterRigistrar">
+					<constructor-arg type="java.lang.String" value="MM-dd-yyyy"/>
+	    		</bean>
+	    	</set>
+	    </property>
+    </bean>
+        
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+    
 </beans>

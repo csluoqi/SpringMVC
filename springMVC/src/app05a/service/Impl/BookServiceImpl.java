@@ -3,6 +3,8 @@ package app05a.service.Impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Service;
 
 import app05a.domain.Book;
@@ -98,4 +100,27 @@ public class BookServiceImpl implements BookService
             }
         }
         return id + 1;
-    }}
+    }
+
+    @Override
+    public boolean isRepeatSubmit(HttpServletRequest request)
+    {
+        String clientToken = request.getParameter("token");
+        String serverToken = (String) request.getSession().getAttribute("token");
+        if (clientToken == null)
+        {
+            return true;
+        }
+        if (serverToken == null)
+        {
+            return true;
+        }
+        if(!serverToken.equals(clientToken))
+        {
+            return true;
+        }
+        request.getSession().removeAttribute("token");
+        return false;
+    }
+    
+}

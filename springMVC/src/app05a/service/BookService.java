@@ -2,6 +2,8 @@ package app05a.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import app05a.domain.Book;
 import app05a.domain.Category;
 
@@ -14,5 +16,6 @@ public interface BookService
     Book update(Book book);
     Book get(long id);
     long getNextId();
-
+    boolean isRepeatSubmit(HttpServletRequest request);
+    
 }
