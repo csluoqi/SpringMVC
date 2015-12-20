@@ -97,7 +97,7 @@ public class BookController {
 
     @RequestMapping(value = "/book_list")
     public String listBooks(Model model) {
-        logg.info("log4j");
+        logg.info("log4jlog4jlog4jlog4jlog4j");
         logg.error("log123456");
         logger.info("book_list");
         List<Book> books = bookService.getAllBooks();
