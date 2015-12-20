@@ -8,6 +8,12 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/springMVC-servlet.xml</param-value>
 	</context-param>
+	<!-- config log4j  first Part -->
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>/WEB-INF/log4j.properties</param-value>
+	</context-param>
+	
 	<servlet>
 		<servlet-name>springMVC</servlet-name>
 		<servlet-class>
@@ -18,7 +24,12 @@
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
-	</servlet-mapping>	
+	</servlet-mapping>
+	<!-- config log4j  first Part -->
+	<!-- 加载log4j配置文件 -->
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>	
 </web-app>
 
 

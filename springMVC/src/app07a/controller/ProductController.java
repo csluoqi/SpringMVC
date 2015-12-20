@@ -1,8 +1,8 @@
 package app07a.controller;
 
 import org.apache.commons.logging.Log;
-
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import app07a.domain.Product;
 import app07a.validator.ProductValidator;
+
+
 /**
  * Spring中的框架可以替代js的判断功能,使业务逻辑尽量集中在java中
  * 如果使用js去判断虽然做起来容易但是因该有缺陷吧
@@ -24,10 +26,12 @@ public class ProductController
 
     private static final Log logger = LogFactory
             .getLog(ProductController.class);
-
+    private static final Logger log = Logger.getLogger(ProductController.class);
     @RequestMapping(value = "/product_input07")
     public String inputProduct(Model model) {
         model.addAttribute("product", new Product());
+        log.info("123");
+        log.error("123455677");;
         return "ProductFormForApp07a";
     }
 

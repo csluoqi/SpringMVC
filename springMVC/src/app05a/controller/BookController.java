@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,7 @@ import app05a.service.TokenProccessor;
 @Controller
 public class BookController {
 
+    private static Logger logg = Logger.getLogger(BookController.class);
     @Autowired
     private BookService bookService;
 
@@ -95,6 +97,8 @@ public class BookController {
 
     @RequestMapping(value = "/book_list")
     public String listBooks(Model model) {
+        logg.info("log4j");
+        logg.error("log123456");
         logger.info("book_list");
         List<Book> books = bookService.getAllBooks();
         model.addAttribute("books", books);
