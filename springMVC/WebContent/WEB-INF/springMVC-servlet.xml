@@ -14,10 +14,10 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 扫描的包 -->
 	<!-- 为了测试app07先注释app04a和app05a -->
-<!--     <context:component-scan base-package="app04"/>
-    <context:component-scan base-package="app05a"/> -->
+	<context:component-scan base-package="app04"/>
+    <context:component-scan base-package="app05a"/>
     <context:component-scan base-package="app06a"/>
-    <context:component-scan base-package="app07a"/>
+    <!-- <context:component-scan base-package="app07a"/> -->
     <!-- 使用转换器 -->
     <!--<mvc:annotation-driven conversion-service="conversionService"/>-->
     <!-- 使用格式化 -->
