@@ -17,6 +17,7 @@
 	<context:component-scan base-package="app04"/>
     <context:component-scan base-package="app05a"/>
     <context:component-scan base-package="app06a"/>
+    <context:component-scan base-package="jdbcStudy" />
     <!-- <context:component-scan base-package="app07a"/> -->
     <!-- 使用转换器 -->
     <!--<mvc:annotation-driven conversion-service="conversionService"/>-->
